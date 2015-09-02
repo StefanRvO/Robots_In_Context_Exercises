@@ -48,7 +48,6 @@ void PathFinder::FindClosestPointOnObstacle()
     if(currentPoint == goal) return;
     point p = FindNextPointOnObstacle(dir);
     currentPoint = p;
-    std::cout << p.x << "\t" << p.y << std::endl;
     obstaclePoints.push_back(p);
     assert ((*map)[p.x][p.y] != mapSpace::obstacle);
 
@@ -77,7 +76,6 @@ void PathFinder::FindClosestPointOnObstacle()
   }
   currentPoint = movepath.back();
   std::cout << "left obstacle" << std::endl;
-
 }
 
 int PathFinder::findNextLeavePoint(std::vector <point> &obstaclePoints)
@@ -118,29 +116,26 @@ point PathFinder::FindNextPointOnLine(bool *obstacle)
 {
   //check all 8 directions collect the ones which are closer to the goal
   //than the current.
-
   point closestpoint = {0, 0};
-  std::vector <point> candidatepoints;
   float curdistance = currentPoint.GetDistance(goal);
+  float mindistance = std::numeric_limits<float>::infinity();
   for(int i = -1; i <= 1; i++)
   {
     for(int j = -1; j <=1; j++)
     {
       if(j == 0 && i == 0) continue;
-      point this_point = {currentPoint.x + i, currentPoint.y + j};
-      float distance = this_point.GetDistance(goal);
-      if(distance <= curdistance) candidatepoints.push_back(this_point);
-    }
-  }
-  //select the wanted point as the one closest to the straight line to goal.
-  float mindistance = std::numeric_limits<float>::infinity();
-  for (auto &p : candidatepoints)
-  {
-    float distance = cur_goal_vec->distanceToPoint(p);
-    if (distance < mindistance)
-    {
-      closestpoint = p;
-      mindistance = distance;
+      point this_point = currentPoint + (point){i, j};
+      if(this_point.y < 0 || this_point.x < 0 ||
+          this_point.y > size_y || this_point.x > size_x) continue;
+      if(this_point.GetDistance(goal) <= curdistance)
+      {   //select the wanted point as the one closest to the straight line to goal.
+        float distance_to_line = cur_goal_vec->distanceToPoint(this_point);
+        if(distance_to_line < mindistance)
+        {
+          closestpoint = this_point;
+          mindistance = distance_to_line;
+        }
+      }
     }
   }
   if((*map)[closestpoint.x][closestpoint.y] == mapSpace::obstacle)

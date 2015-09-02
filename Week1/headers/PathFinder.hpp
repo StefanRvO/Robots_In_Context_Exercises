@@ -16,8 +16,8 @@ class PathFinder
     float closestDistance;
     std::vector<point> movepath;
     std::vector< std::vector< mapSpace > > *map = nullptr;
-    unsigned long size_x;
-    unsigned long size_y;
+    long size_x;
+    long size_y;
     point currentPoint;
     point goal;
     vector2D *m_line = nullptr;
