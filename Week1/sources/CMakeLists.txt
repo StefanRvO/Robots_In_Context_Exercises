@@ -27,7 +27,7 @@ SET( CMAKE_CXX_FLAGS  "	-std=c++14 		\
 " )
 
 # And now we add any targets that we want
-add_executable(readpgmtest readpgmtest.cpp PPMLoader.cpp Image.cpp PathFinder.cpp)
+add_executable(readpgmtest readpgmtest.cpp PPMLoader.cpp Image.cpp PathFinder.cpp point.cpp vector2D.cpp)
 
 
 

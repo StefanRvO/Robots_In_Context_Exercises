@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
       img->setPixel8U(p.x, p.y, 100);
       std::cout << p.x << "\t" << p.y << std::endl;
     }
-
+    std::cout << "Path Lenght:" << movepath.size() << std::endl;
     std::cout << "saving image..." << std::endl;
     // save image
     img->saveAsPGM("testout.pgm");
