@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "../headers/Map.hpp"
 #include "../headers/Bug1.hpp"
+#include "../headers/Bug2.hpp"
 #include <ctime>
 
 using namespace rw::sensor;

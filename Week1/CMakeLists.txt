@@ -28,6 +28,21 @@ ELSE()
 	SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ROOT}" CACHE PATH "Archive directory" FORCE)
 ENDIF()
 
+#Wanted to add more error flags, but Image.cpp throw warnings with -pedantic and -Wunused-variable
+SET( CMAKE_CXX_FLAGS  "	-std=c++14 		\
+			-g			\
+		 	-Wall 			\
+			-Wextra 		\
+			-Wshadow 		\
+			-Wpointer-arith 	\
+			-ffunction-sections 	\
+			-fdata-sections		\
+			-Wcast-qual		\
+			-Werror			\
+			-Wno-unused-variable 	\
+			-Ofast			\
+" )
+
 add_subdirectory("sources")
 
 

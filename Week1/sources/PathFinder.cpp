@@ -74,7 +74,7 @@ point PathFinder::FindNextPointOnLine(bool *obstacle, vector2D &line)
   return closestpoint;
 }
 
-point PathFinder::FindNextPointOnObstacle(direction dir)
+point PathFinder::FindNextPointOnObstacle(direction dir, point lastpoint)
 {
   //std::cout << "r" << currentPoint.x << "\t" << currentPoint.y << std::endl;
   //sequencies of points to check
@@ -88,6 +88,7 @@ point PathFinder::FindNextPointOnObstacle(direction dir)
   //first, detect in which direction the obstacle is
   point p = currentPoint;
   unsigned int i;
+  std::cout << p.x << "\t" << p.y << std::endl;
   for(i = 0; (*map)[p.x][p.y] != mapSpace::obstacle; i++)
   {
     p = currentPoint + *(sequence_ptr + i);
@@ -95,11 +96,15 @@ point PathFinder::FindNextPointOnObstacle(direction dir)
   }
   //Now, go from this point in the sequence and forward(even starting the sequence over),
   //until a free space is found
-  while((*map)[p.x][p.y] != mapSpace::freespace)
+  i %= sizeof(clockwisequence) / sizeof(clockwisequence[0]);
+  unsigned int i0 = i;
+  while((*map)[p.x][p.y] != mapSpace::freespace or p == lastpoint)
   {
-      i %= sizeof(clockwisequence) / sizeof(clockwisequence[0]);
       p = currentPoint + *(sequence_ptr + i);
       i++;
+      i %= sizeof(clockwisequence) / sizeof(clockwisequence[0]);
+      if(i == i0 && lastpoint != (point){-1, -1}) return lastpoint; //we have tried all the options, return last point.
+
   }
   return p;
 

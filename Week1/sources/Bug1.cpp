@@ -41,14 +41,17 @@ void Bug1::findNextLeavePoint()
   std::vector <point> obstaclePoints;
 
   //go all around the obstacle
+  point lastpoint = {-1, -1};
   obstaclePoints.push_back(currentPoint);
   do
   {
     if(currentPoint == m_line->getEndPoint()) return;
-    point p = FindNextPointOnObstacle(dir);
+    point p = FindNextPointOnObstacle(dir, lastpoint);
+    lastpoint = currentPoint;
     currentPoint = p;
     obstaclePoints.push_back(p);
     assert ((*map)[p.x][p.y] != mapSpace::obstacle);
+    std::cout << p.x << "\t" << p.y << std::endl;
 
   } while(!currentPoint.isNeighbour(obstaclePoints[0]) or obstaclePoints.size() <= 2);
   movepath.insert(movepath.end(), obstaclePoints.begin(), obstaclePoints.end());

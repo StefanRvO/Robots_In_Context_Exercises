@@ -23,7 +23,7 @@ class PathFinder
     virtual void findPath() {};
     virtual void goToNextObstacle() {};
     virtual void findNextLeavePoint() {};
-    virtual point FindNextPointOnObstacle(direction dir);
+    virtual point FindNextPointOnObstacle(direction dir, point lastpoint);
     virtual point FindNextPointOnLine(bool *obstacle, vector2D &line);
     virtual int findClosestPoint(std::vector <point> &obstaclePoints, const point &goal_p);
 

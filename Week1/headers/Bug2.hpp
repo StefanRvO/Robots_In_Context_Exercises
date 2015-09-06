@@ -2,14 +2,15 @@
 
 #include "PathFinder.hpp"
 
-class Bug1 : public PathFinder
+class Bug2 : public PathFinder
 {
   protected:
     vector2D *cur_goal_vec = nullptr;
     virtual void findPath();
     virtual void goToNextObstacle();
     virtual void findNextLeavePoint();
+    point prev_leave_point ={0, 0};
   public:
-    virtual ~Bug1();
+    virtual ~Bug2();
     using PathFinder::PathFinder;
 };
