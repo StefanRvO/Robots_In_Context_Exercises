@@ -15,12 +15,12 @@ point point::operator +(const point &p)
 {
   return {p.x + this->x, p.y + this->y};
 }
-float point::GetDistance(point &p)
+float point::GetDistance(const point &p) const
 {
   return sqrt( pow(this->x - p.x, 2) + pow(this->y - p.y, 2) );
 }
 
-float point::GetDistance(point p1, point p2)
+float point::GetDistance(const point p1, const point p2)
 {
   return p1.GetDistance(p2);
 }

@@ -3,7 +3,7 @@
 #include "../headers/PPMLoader.hpp"
 #include <cstdlib>
 #include "../headers/Map.hpp"
-#include "../headers/PathFinder.hpp"
+#include "../headers/Bug1.hpp"
 #include <ctime>
 
 using namespace rw::sensor;
@@ -42,11 +42,11 @@ int main(int argc, char** argv) {
               map.push_back(y_line);
         }
     }
-    PathFinder Bug1(&map);
+    Bug1 Bug(&map);
     point startPoint = {atoi(argv[2]), atoi(argv[3])};
     point endPoint = {atoi(argv[4]), atoi(argv[5])};
 
-    std::vector<point> movepath = Bug1.getPath(startPoint, endPoint);
+    std::vector<point> movepath = Bug.getPath(startPoint, endPoint);
 
     std::cout << "coloring the move path" << std::endl;
     for(auto &p : movepath)

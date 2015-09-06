@@ -11,25 +11,25 @@ enum direction
 
 class PathFinder
 {
-  private:
-    point closestPoint;
-    float closestDistance;
+  protected:
+    //point closestPoint;
+    //float closestDistance;
     std::vector<point> movepath;
     std::vector< std::vector< mapSpace > > *map = nullptr;
     long size_x;
     long size_y;
     point currentPoint;
-    point goal;
     vector2D *m_line = nullptr;
-    vector2D *cur_goal_vec = nullptr;
+    virtual void findPath() {};
+    virtual void goToNextObstacle() {};
+    virtual void findNextLeavePoint() {};
+    virtual point FindNextPointOnObstacle(direction dir);
+    virtual point FindNextPointOnLine(bool *obstacle, vector2D &line);
+    virtual int findClosestPoint(std::vector <point> &obstaclePoints, const point &goal_p);
+
   public:
     PathFinder(std::vector< std::vector< mapSpace > > *_map);
-    ~PathFinder();
-    std::vector<point> getPath(point startpos, point endpos);
-    void goToNextObstacle();
-    void FindClosestPointOnObstacle();
-    point FindNextPointOnObstacle(direction dir);
-    point FindNextPointOnLine(bool *obstacle);
-    int findNextLeavePoint(std::vector <point> &obstaclePoints);
+    virtual ~PathFinder();
+    virtual std::vector<point> getPath(point startpos, point endpos);
 
 };

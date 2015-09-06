@@ -7,7 +7,7 @@ class point
   bool operator ==(const point &p);
   bool operator !=(const point &p);
   point operator +(const point &p);
-  float GetDistance(point &p);
-  static float GetDistance(point p1, point p2);
+  float GetDistance(const point &p) const;
+  static float GetDistance(const point p1, const point p2);
   bool isNeighbour(point &p);
 };
