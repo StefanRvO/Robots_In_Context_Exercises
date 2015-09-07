@@ -36,7 +36,7 @@ void Bug1::goToNextObstacle()
 
 void Bug1::findNextLeavePoint()
 {
-  std::cout << "Hit obstacle" << std::endl;
+  //std::cout << "Hit obstacle" << std::endl;
   direction dir = static_cast<direction>(rand()%2);
   std::vector <point> obstaclePoints;
 
@@ -50,7 +50,7 @@ void Bug1::findNextLeavePoint()
     lastpoint = currentPoint;
     currentPoint = p;
     obstaclePoints.push_back(p);
-    assert ((*map)[p.x][p.y] != mapSpace::obstacle);
+    assert (map[p.x][p.y] != mapSpace::obstacle);
     std::cout << p.x << "\t" << p.y << std::endl;
 
   } while(!currentPoint.isNeighbour(obstaclePoints[0]) or obstaclePoints.size() <= 2);
@@ -77,5 +77,5 @@ void Bug1::findNextLeavePoint()
     }
   }
   currentPoint = movepath.back();
-  std::cout << "left obstacle" << std::endl;
+  //std::cout << "left obstacle" << std::endl;
 }

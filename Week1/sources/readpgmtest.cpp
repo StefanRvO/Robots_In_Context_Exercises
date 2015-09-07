@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
               map.push_back(y_line);
         }
     }
-    Bug1 Bug(&map);
+    Bug2 Bug(map);
     point startPoint = {atoi(argv[2]), atoi(argv[3])};
     point endPoint = {atoi(argv[4]), atoi(argv[5])};
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     for(auto &p : movepath)
     {
       img->setPixel8U(p.x, p.y, 100);
-      std::cout << p.x << "\t" << p.y << std::endl;
+      //std::cout << p.x << "\t" << p.y << std::endl;
     }
     std::cout << "Path Lenght:" << movepath.size() << std::endl;
     std::cout << "saving image..." << std::endl;

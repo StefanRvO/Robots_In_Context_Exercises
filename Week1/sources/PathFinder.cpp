@@ -2,11 +2,11 @@
 #include <iostream>
 #include <limits>
 #include <cassert>
-PathFinder::PathFinder(std::vector< std::vector< mapSpace > > *_map)
+PathFinder::PathFinder(std::vector< std::vector< mapSpace > > &_map)
+:map(_map)
 {
-  map = _map;
-  size_x = map->size();
-  size_y = (*map)[0].size();
+  size_x = map.size();
+  size_y = map[0].size();
 }
 PathFinder::~PathFinder()
 {
@@ -69,7 +69,7 @@ point PathFinder::FindNextPointOnLine(bool *obstacle, vector2D &line)
       }
     }
   }
-  if((*map)[closestpoint.x][closestpoint.y] == mapSpace::obstacle)
+  if(map[closestpoint.x][closestpoint.y] == mapSpace::obstacle)
     *obstacle = true;
   return closestpoint;
 }
@@ -88,19 +88,29 @@ point PathFinder::FindNextPointOnObstacle(direction dir, point lastpoint)
   //first, detect in which direction the obstacle is
   point p = currentPoint;
   unsigned int i;
-  std::cout << p.x << "\t" << p.y << std::endl;
-  for(i = 0; (*map)[p.x][p.y] != mapSpace::obstacle; i++)
+  //std::cout << p.x << "\t" << p.y << std::endl;
+  for(i = 0; map[p.x][p.y] != mapSpace::obstacle; i++)
   {
     p = currentPoint + *(sequence_ptr + i);
+    if(p.y < 0 || p.x < 0 ||  p.y > size_y || p.x > size_x)
+    {
+      p = currentPoint;
+      continue;
+    }
+
     assert(i < sizeof(clockwisequence) / sizeof(clockwisequence[0]));
   }
   //Now, go from this point in the sequence and forward(even starting the sequence over),
   //until a free space is found
   i %= sizeof(clockwisequence) / sizeof(clockwisequence[0]);
   unsigned int i0 = i;
-  while((*map)[p.x][p.y] != mapSpace::freespace or p == lastpoint)
+  while(map[p.x][p.y] != mapSpace::freespace or p == lastpoint)
   {
       p = currentPoint + *(sequence_ptr + i);
+      if(p.y < 0 || p.x < 0 || p.y > size_y || p.x > size_x)
+      {
+        p = currentPoint + *(sequence_ptr + i0);;
+      }
       i++;
       i %= sizeof(clockwisequence) / sizeof(clockwisequence[0]);
       if(i == i0 && lastpoint != (point){-1, -1}) return lastpoint; //we have tried all the options, return last point.

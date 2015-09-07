@@ -32,7 +32,7 @@ void Bug2::goToNextObstacle()
 
 void Bug2::findNextLeavePoint()
 {
-  std::cout << "Hit obstacle" << std::endl;
+  //std::cout << "Hit obstacle" << std::endl;
   direction dir = static_cast<direction>(rand()%2);
   std::vector <point> obstaclePoints;
 
@@ -47,11 +47,10 @@ void Bug2::findNextLeavePoint()
     lastpoint = currentPoint;
     currentPoint = p;
     obstaclePoints.push_back(p);
-    assert ((*map)[p.x][p.y] != mapSpace::obstacle);
+    assert (map[p.x][p.y] != mapSpace::obstacle);
     float distance = m_line->distanceToPoint(p);
     if(distance < 1.) //we have hit the m_line
     {
-      std::cout << "test" << std::endl;
       //check if a neighbour is closer to the m_line, if so, go to that instead
       point closestpoint = p;
       float closestDistance = distance;
@@ -61,7 +60,9 @@ void Bug2::findNextLeavePoint()
         {
           if((j == 0 && i == 0)) continue;
           point p1 = {p.x + j, p.y + i};
-          if((*map)[p1.x][p1.y] == mapSpace::obstacle) continue;
+          if(p.y < 0 || p.x < 0 || p.y > size_y || p.x > size_x ||
+              map[p1.x][p1.y] == mapSpace::obstacle) continue;
+              
           if(m_line->distanceToPoint(p1) < closestDistance)
           {
             closestpoint = p1;
@@ -78,5 +79,5 @@ void Bug2::findNextLeavePoint()
 
   prev_leave_point = movepath.back();
   currentPoint = movepath.back();
-  std::cout << "left obstacle" << std::endl;
+  //std::cout << "left obstacle" << std::endl;
 }

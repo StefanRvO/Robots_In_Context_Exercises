@@ -15,7 +15,7 @@ class PathFinder
     //point closestPoint;
     //float closestDistance;
     std::vector<point> movepath;
-    std::vector< std::vector< mapSpace > > *map = nullptr;
+    std::vector< std::vector< mapSpace > > &map;
     long size_x;
     long size_y;
     point currentPoint;
@@ -28,7 +28,7 @@ class PathFinder
     virtual int findClosestPoint(std::vector <point> &obstaclePoints, const point &goal_p);
 
   public:
-    PathFinder(std::vector< std::vector< mapSpace > > *_map);
+    PathFinder(std::vector< std::vector< mapSpace > > &_map);
     virtual ~PathFinder();
     virtual std::vector<point> getPath(point startpos, point endpos);
 
