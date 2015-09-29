@@ -31,5 +31,6 @@ class PathFinder
     PathFinder(std::vector< std::vector< mapSpace > > &_map);
     virtual ~PathFinder();
     virtual std::vector<point> getPath(point startpos, point endpos);
+    //virtual point FindClosestObstacle(point pos);
 
 };

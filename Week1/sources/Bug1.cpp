@@ -13,7 +13,11 @@ void Bug1::findPath()
   while(currentPoint != m_line->getEndPoint())
   {
     goToNextObstacle();
+    std::cout << currentPoint.x << "\t" << currentPoint.y << std::endl;
+    std::cout << movepath.size() << std::endl;
     findNextLeavePoint();
+    std::cout << currentPoint.x << "\t" << currentPoint.y << std::endl;
+    std::cout << movepath.size() << std::endl;
     delete cur_goal_vec;
     cur_goal_vec = new vector2D(currentPoint, m_line->getEndPoint());
   }
@@ -51,7 +55,7 @@ void Bug1::findNextLeavePoint()
     currentPoint = p;
     obstaclePoints.push_back(p);
     assert (map[p.x][p.y] != mapSpace::obstacle);
-    std::cout << p.x << "\t" << p.y << std::endl;
+    //std::cout << p.x << "\t" << p.y << std::endl;
 
   } while(!currentPoint.isNeighbour(obstaclePoints[0]) or obstaclePoints.size() <= 2);
   movepath.insert(movepath.end(), obstaclePoints.begin(), obstaclePoints.end());
@@ -59,8 +63,8 @@ void Bug1::findNextLeavePoint()
   //calculate the next leavepoint.
   unsigned int index = findClosestPoint(obstaclePoints, m_line->getEndPoint());
   //find if it is fastest to go back or forward
-  std::cout << index << std::endl;
-  if(obstaclePoints.size() / 2 + 1 > index)
+  //std::cout << index << std::endl;
+  if(obstaclePoints.size() / 2 + 1 < index)
   {
     //go backward
     for( unsigned int i = obstaclePoints.size() - 2; i >= index; i--)

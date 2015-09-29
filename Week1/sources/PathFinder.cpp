@@ -117,5 +117,10 @@ point PathFinder::FindNextPointOnObstacle(direction dir, point lastpoint)
 
   }
   return p;
-
 }
+/*
+point PathFinder::FindClosestObstacle(point pos)
+{
+  //Search around the position until we find an obstacle
+}
+*/

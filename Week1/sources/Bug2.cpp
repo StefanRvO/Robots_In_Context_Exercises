@@ -62,7 +62,7 @@ void Bug2::findNextLeavePoint()
           point p1 = {p.x + j, p.y + i};
           if(p.y < 0 || p.x < 0 || p.y > size_y || p.x > size_x ||
               map[p1.x][p1.y] == mapSpace::obstacle) continue;
-              
+
           if(m_line->distanceToPoint(p1) < closestDistance)
           {
             closestpoint = p1;
