@@ -42,6 +42,7 @@ SET( CMAKE_CXX_FLAGS  "	-std=c++14 		\
 			-Wno-unused-variable 	\
 			-pedantic		\
 			-Wunused-variable	\
+			-Ofast			\
 " )
 
 add_subdirectory("sources")

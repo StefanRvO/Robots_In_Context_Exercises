@@ -41,6 +41,8 @@ void Planner::compute_wavefront(const point &goal)
     expand_points_this->clear();
     std::swap(expand_points_this, expand_points_next);
   }
+  delete expand_points_this;
+  delete expand_points_next;
 }
 
 inline void Planner::check_neighbour(const point &this_point, const point &neighbour, std::vector<point> &expand_points_next)
@@ -79,17 +81,17 @@ inline void Planner::prepare_wavefront(const point &goal)
   {
     for(int y = 0; y < size_y; y++)
     {
-      wavefront[x][y] = (uint64_t)map[x][y];
+      setDistance({x, y}, (uint64_t)map[x][y]);
     }
   }
-  wavefront[goal.x][goal.y] = 2; //set goal
+  setDistance(goal, 2); //set goal
 }
 inline uint64_t Planner::getDistance(const point &p) const
 { //returns distance to goal
   return wavefront[p.x][p.y];
 }
 inline void Planner::setDistance(const point &p, const uint64_t value)
-{ //returns distance to goal
+{
   wavefront[p.x][p.y] = value;
 }
 

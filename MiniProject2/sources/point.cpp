@@ -1,20 +1,6 @@
 #include "../headers/point.hpp"
 #include <cmath>
 
-bool point::operator ==(const point &p) const
-{
-  return (this->x == p.x && this->y == p.y);
-}
-
-bool point::operator !=(const point &p) const
-{
-  return !(this->x == p.x && this->y == p.y);
-}
-
-point point::operator +(const point &p) const
-{
-  return {p.x + this->x, p.y + this->y};
-}
 float point::GetDistance(const point &p) const
 {
   return sqrt( pow(this->x - p.x, 2) + pow(this->y - p.y, 2) );

@@ -4,9 +4,20 @@ class point
   public:
   int x;
   int y;
-  bool operator ==(const point &p) const;
-  bool operator !=(const point &p) const;
-  point operator +(const point &p) const;
+  inline bool operator ==(const point &p) const
+  {
+    return (this->x == p.x && this->y == p.y);
+  }
+  inline bool operator !=(const point &p) const
+  {
+    return !(*this == p);
+  }
+
+  inline point operator +(const point &p) const
+  {
+    return {p.x + this->x, p.y + this->y};
+  }
+
   float GetDistance(const point &p) const;
   static float GetDistance(const point p1, const point p2);
   bool isNeighbour(const point &p);
