@@ -14,7 +14,7 @@ struct RGB
   uint8_t r, g, b;
 };
 
-RGB mapcolour(int value, int max)
+RGB mapcolour(uint64_t value, uint64_t max)
 { //map colours according to value and maxvalue
   //the returned colour will be more red the closer it is to 0
   //and more blue the closer it is to max.
@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
     }
     std::cout << "creating wavefront map" << std::endl;
     //First, find the max wavefront value
-    int max = 0;
+    uint64_t max = 0;
     for(unsigned int x = 0; x < img->getWidth(); x++)
     {
       for(unsigned int y = 0; y < img->getHeight(); y++)

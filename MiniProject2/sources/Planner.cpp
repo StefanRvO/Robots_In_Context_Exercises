@@ -54,11 +54,11 @@ inline void Planner::check_neighbour(const point &this_point, const point &neigh
     return;
   }
   //only expand into point if value is either 0 or at least 2 larger than current value.
-  if(wavefront[neighbour.x][neighbour.y] == 0 ||
-    wavefront[neighbour.x][neighbour.y] > wavefront[this_point.x][this_point.y] + 1)
+  if(getDistance(neighbour) == 0 ||
+    getDistance(neighbour) > getDistance(this_point) + 1)
   {
     //set point to current value + 1
-    wavefront[neighbour.x][neighbour.y] = wavefront[this_point.x][this_point.y] + 1;
+    setDistance(neighbour, getDistance(this_point) + 1);
     expand_points_next.push_back(neighbour);
   }
 }
@@ -84,9 +84,13 @@ inline void Planner::prepare_wavefront(const point &goal)
   }
   wavefront[goal.x][goal.y] = 2; //set goal
 }
-inline int Planner::getDistance(const point &p) const
+inline uint64_t Planner::getDistance(const point &p) const
 { //returns distance to goal
   return wavefront[p.x][p.y];
+}
+inline void Planner::setDistance(const point &p, const uint64_t value)
+{ //returns distance to goal
+  wavefront[p.x][p.y] = value;
 }
 
 std::vector<point> Planner::getGoalPath(const point &start) const
