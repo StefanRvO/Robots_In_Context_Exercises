@@ -45,7 +45,7 @@ void Planner::compute_wavefront(const point &goal)
   delete expand_points_next;
 }
 
-inline void Planner::check_neighbour(const point &this_point, const point &neighbour, std::vector<point> &expand_points_next)
+void Planner::check_neighbour(const point &this_point, const point &neighbour, std::vector<point> &expand_points_next)
 { //check if we should expand in to the given neighbour, and if so, add it
   //to the list of points to check on next run.
 
@@ -65,7 +65,7 @@ inline void Planner::check_neighbour(const point &this_point, const point &neigh
   }
 }
 
-inline void Planner::prepare_wavefront(const point &goal)
+void Planner::prepare_wavefront(const point &goal)
 { //prepare wavefront structure for computations
   //First allocate the required space
   if(wavefront == nullptr)
@@ -85,14 +85,6 @@ inline void Planner::prepare_wavefront(const point &goal)
     }
   }
   setDistance(goal, 2); //set goal
-}
-inline uint64_t Planner::getDistance(const point &p) const
-{ //returns distance to goal
-  return wavefront[p.x][p.y];
-}
-inline void Planner::setDistance(const point &p, const uint64_t value)
-{
-  wavefront[p.x][p.y] = value;
 }
 
 std::vector<point> Planner::getGoalPath(const point &start) const
